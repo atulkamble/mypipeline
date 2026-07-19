@@ -2,24 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('dev') {
+        stage('check python') {
             steps {
-                echo 'I am in dev phase'
-                sh 'git --version'
-                echo 'checked git version'
+                echo 'I am in check python phase'
+                sh 'python3 --version'
+                echo 'checked python version'
             }
         }
-        stage('test') {
+        stage('python run') {
             steps {
-                echo 'I am in test phase'
-                sh 'docker --version'
+                echo 'I am in python run phase'
+                sh 'python3 helloworld.py'
             }
         }
-        stage('prod') {
-            steps {
-                echo 'I am in prod phase'
-                sh 'mvn -v'
-            }
-        }
+        
     }
 }
