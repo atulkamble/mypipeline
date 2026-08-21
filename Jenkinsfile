@@ -2,12 +2,18 @@ pipeline {
     agent any
 
     stages {
-        stage('python code') {
+        stage('docker build') {
             steps {
-                echo 'checking python version'
-                sh 'python --version'
-                echo 'running python program'
-                sh 'python helloworld.py'
+                echo 'checking docker version'
+                sh 'docker --version'
+                echo 'image build'
+                sh 'docker build -t myapp'
+            }
+        }
+        stage('docker run') {
+            steps {
+                echo 'create container'
+                sh 'docker run myapp'
             }
         }
     }
