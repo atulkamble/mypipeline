@@ -2,17 +2,19 @@ pipeline {
     agent any
 
     stages {
-        stage('docker build') {
+        stage('Docker Build') {
             steps {
-                echo 'checking docker version'
+                echo 'Checking Docker version'
                 sh 'docker --version'
-                echo 'image build'
-                sh 'docker build -t myapp'
+
+                echo 'Building Docker image'
+                sh 'docker build -t myapp .'
             }
         }
-        stage('docker run') {
+
+        stage('Docker Run') {
             steps {
-                echo 'create container'
+                echo 'Creating container'
                 sh 'docker run myapp'
             }
         }
