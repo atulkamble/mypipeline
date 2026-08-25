@@ -1,1 +1,29 @@
+trigger:
+  - main
 
+pool:
+  vmImage: 'ubuntu-latest'
+
+stages:
+  - stage: BuildAndRun
+    displayName: 'Build and Run Docker Container'
+
+    jobs:
+      - job: DockerJob
+        displayName: 'Docker Build and Run'
+
+        steps:
+          - script: |
+              echo "Building Docker image..."
+              docker build -t myapp:latest .
+            displayName: 'Build Docker Image'
+
+          - script: |
+              echo "Creating Docker container..."
+              docker run -d --name myapp_container myapp:latest
+            displayName: 'Create Docker Container'
+
+          - script: |
+              echo "Checking containers..."
+              docker ps -a
+            displayName: 'Check Docker Container'
